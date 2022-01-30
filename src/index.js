@@ -3,7 +3,7 @@ const express = require("express");
 const helmet = require("helmet");
 const cors = require('cors');
 
-const { dbConnection } = require("./config/config");
+const { dbConnection } = require("./config/dbConnection");
 const { routes } = require("./routes/routes");
 
 const app = express();
@@ -20,9 +20,13 @@ const middlewares = () => {
 }
 
 const appStart = async () => {
+
     dbConnect();
+
     middlewares();
+
     routes(app);
+
     app.listen(process.env.PORT, () => {
         console.log('Servidor corriengo en el puerto', process.env.PORT);
     });
