@@ -1,5 +1,6 @@
 const { getHeroesModule,
-    getHeroeModule } = require('./heroes.module');
+    getHeroeModule,
+    setHeroTeamModule } = require('./heroes.module');
 
 const getHeroes = async (req, res) => {
     try {
@@ -19,7 +20,17 @@ const getHeroe = async (req, res) => {
     }
 }
 
+const setHeroTeam = async (req, res) => {
+    try {
+        const response = await setHeroTeamModule(req);
+        return res.status(response.code).send(response);
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
     getHeroes,
-    getHeroe
+    getHeroe,
+    setHeroTeam
 }
