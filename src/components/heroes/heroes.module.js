@@ -1,6 +1,7 @@
 const { ResponseMessage } = require('../../util/responseMessage');
 const { getHeroesService,
-    getHeroeService } = require('./heroes.service')
+    getHeroeService,
+    setHeroTeamService } = require('./heroes.service')
 
 const getHeroesModule = async (req) => {
     try {
@@ -20,7 +21,17 @@ const getHeroeModule = async (req) => {
     }
 }
 
+const setHeroTeamModule = async (req) => {
+    try {
+        const { code, message, response } = await setHeroTeamService(req);
+        return new ResponseMessage(code, message, response);
+    } catch (error) {
+        return new ResponseMessage(error.response, error.message)
+    }
+}
+
 module.exports = {
     getHeroesModule,
-    getHeroeModule
+    getHeroeModule,
+    setHeroTeamModule
 }
