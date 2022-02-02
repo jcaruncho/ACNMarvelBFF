@@ -1,7 +1,10 @@
 const path = require('path');
-const { getHeroes,
-    getHeroe,
-    setHeroTeam } = require("../components/heroes/heroes.controller");
+const { getHeroes } = require("../components/heroes/getHeroes.controller");
+const { getHeroe } = require("../components/heroes/getHeroe.controller");
+const { setHeroTeam } = require("../components/heroes/setHeroTeam.controller");
+const { healthcheck } = require("../components/healthcheck/healthcheck.controller");
+
+//const { validateGetHeroe } = require("../middlewares/heroes/validateGetHeroe");
 
 const prefixRoute = process.env.BFF_PREFIX;
 
@@ -12,8 +15,9 @@ const routes = (app) => {
 
     app.post(`${prefixRoute}/setHeroTeam`, setHeroTeam);
 
-    app.get('*', function (req, res) {
-        console.log(__dirname);
+    app.get(`${prefixRoute}/healthcheck`, healthcheck);
+
+    app.get('*', () => {
         res.sendFile(path.resolve(__dirname + '/../../public/index.html'));
     });
 }
